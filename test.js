@@ -312,9 +312,6 @@ test('Update one user', async t => {
 
 
 
-
-
-
 function fakeUser() {
   let languages = ['english', 'french', 'spanish', 'klingon'];
   let types = ['admin', 'moderator', 'user'];
