@@ -6,25 +6,7 @@ var users = require('./users.json');
 
 var app = express();
 
-app.delete('/api/users/forum/:id', function (req, res, next) {
-	var id = parseInt(req.params.id);
-	var favorite = req.param;
-	console.log(req.param('foo'));
-	
-	users.map(function (ele, i) {
-		if (ele.id === id ) {
-			for (var j = 0; j < ele.favorites.length; j++) {
-				if (ele.favorites[j] === favorite) {
-					console.log('in favorites');
-					console.log('spliced ' + ele.favorites.splice(j,1));
-					res.sendStatus(200);
-				}
-			}
-		}
-	});
-	res.sendStatus(200);
-	
-});
+
 
 app.use(bodyParser.json());
 
@@ -148,6 +130,8 @@ app.post('/api/users/forums/:id',function (req, res, next) {
 	var id = parseInt(req.params.id);
 	var favorite = req.body.add;
 	
+	console.log('hit by test', req.body)
+	
 	console.log('to be added req body', req.body);
 	
 	users.map(function (ele, i) {
@@ -181,7 +165,24 @@ app.put('/api/users/:id', function (req, res, next) {
 });
 
 
-
+app.delete('/api/users/forums/:id', function (req, res, next) {
+	var id = parseInt(req.params.id);
+	var favorite = req.query.favorite;
+	
+	users.map(function (ele, i) {
+		if (ele.id === id ) {
+			for (var j = 0; j < ele.favorites.length; j++) {
+				if (ele.favorites[j] === favorite) {
+					console.log('in favorites');
+					console.log('spliced ' + ele.favorites.splice(j,1));
+					res.sendStatus(200);
+				}
+			}
+		}
+	});
+	res.sendStatus(200);
+	
+});
 
 app.delete('/api/users/:id',function (req, res, next) {
 	var id = parseInt(req.params.id);
